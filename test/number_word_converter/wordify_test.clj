@@ -1,6 +1,14 @@
 (ns number-word-converter.wordify-test
   (:require [clojure.test :refer :all]
-            [number-word-converter.wordify :refer [wordify]]))
+            [number-word-converter.wordify :refer :all]))
+
+(deftest word-seq-test
+  (testing "should produce sequence of words for number"
+    (is (= (word-seq 21) '("twenty" "one")))))
+
+(deftest stringify-word-seq-test
+  (testing "should turn a word seq into a string without nils"
+    (is (= (stringify-word-seq '("this" "is" nil "a" "string")) "this is a string"))))
 
 (deftest wordify-single-digits
   (testing "should return zero when 0 provided"
