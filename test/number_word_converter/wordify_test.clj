@@ -17,3 +17,7 @@
     (is (= (wordify 21) "twenty one")))
   (testing "should return seventeen when 17 provided"
     (is (= (wordify 17) "seventeen"))))
+
+(deftest wordify-triple-digits
+  (testing "should return one hundred when 100 provided"
+    (is (= (wordify 100) "one hundred"))))

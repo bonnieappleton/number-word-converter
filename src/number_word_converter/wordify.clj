@@ -7,9 +7,14 @@
   (and (> num 10) (< num 20)))
 
 (defn wordify [num]
-  (cond
-    (zero? num) words/zero
-    (teen? num) ((keywordise (mod num 10)) words/teens)
-    :else (clojure.string/trim (str ((keywordise (int (/ num 10))) words/tens)
-                                    " "
-                                    ((keywordise (mod num 10)) words/integers)))))
+  (if (zero? num)
+    words/zero
+    (clojure.string/trim
+      (let [hundred-value (int (/ num 100))
+            rest (mod num 100)]
+        (str (if (pos-int? hundred-value) (str ((keywordise hundred-value) words/integers) " " "hundred"))
+             (if (teen? num)
+               ((keywordise (mod num 10)) words/teens)
+               (str ((keywordise (int (/ num 10))) words/tens)
+                    " "
+                    ((keywordise (mod num 10)) words/integers))))))))
