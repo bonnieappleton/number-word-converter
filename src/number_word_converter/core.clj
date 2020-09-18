@@ -13,5 +13,12 @@
    :8 "eight"
    :9 "nine"})
 
+(defn- is-valid [input]
+  (and (int? input)
+       (not (neg-int? input))
+       (<= input 999999999)))
+
 (defn word-from-number [num]
-  ((keyword (str num)) integers-as-words))
+  (if (is-valid num)
+    ((keyword (str num)) integers-as-words)
+    (throw (Exception. "Input must be an integer in the range 0 to 999,999,999 inclusive"))))
