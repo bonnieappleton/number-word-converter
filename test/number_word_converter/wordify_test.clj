@@ -53,5 +53,9 @@
 (deftest wordify-thousands
   (testing "should return one thousand when 1000 provided"
     (is (= (wordify 1000) "one thousand")))
-  (testing "should return one thousand when 1000 provided"
+  (testing "should return nine thousand nine hundred and ninety nine when 1000 provided"
     (is (= (wordify 9999) "nine thousand nine hundred and ninety nine"))))
+
+(deftest wordify-millions
+  (testing "should return fifty six million nine hundred and forty five thousand seven hundred and eighty one"
+    (is (= (wordify 56945781) "fifty six million nine hundred and forty five thousand seven hundred and eighty one"))))
