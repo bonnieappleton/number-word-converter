@@ -20,13 +20,20 @@
                       ((keywordise int-value) words/integers)])]
     (remove nil? (concat hundreds-words and tens-words))))
 
+(defn decorate-word-seqs [[hundred-seq thousand-seq million-seq]]
+  [million-seq
+   thousand-seq
+   (if (seq thousand-seq) "thousand")
+   hundred-seq])
+
 (defn word-seq [number-seq]
   (->> number-seq
        reverse
        (partition-all 3)
        (map three-digit-word-seq)
-       reverse
-       flatten))
+       decorate-word-seqs
+       flatten
+       (remove nil?)))
 
 (defn stringify-word-seq [word-seq]
   (->> word-seq
