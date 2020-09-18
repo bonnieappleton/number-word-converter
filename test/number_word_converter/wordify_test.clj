@@ -3,16 +3,18 @@
             [number-word-converter.wordify :refer :all]))
 
 (deftest number-to-seq-test
-  (testing "should turn number into a seq of the digits in reverse"
-    (is (= (reverse-seq-from-number 1234) '(4 3 2 1)))))
+  (testing "should turn number into a seq of the digits"
+    (is (= (seq-from-number 1234) '(1 2 3 4)))))
 
-(deftest word-seq-test
-  (testing "should produce sequence of words for number"
-    (is (= (word-seq '(1 2 5)) '("five" "hundred" "and" "twenty" "one")))))
+(deftest three-digit-word-seq-test
+  (testing "should produce sequence of words for sequence of ints in reverse"
+    (is (= (three-digit-word-seq '(1 2 5)) '("five" "hundred" "and" "twenty" "one"))))
+  (testing "should remove null values from seq"
+    (is (= (three-digit-word-seq '(0 0 1)) '("one" "hundred")))))
 
 (deftest stringify-word-seq-test
   (testing "should turn a word seq into a string without nils"
-    (is (= (stringify-word-seq '("this" "is" nil "a" "string")) "this is a string"))))
+    (is (= (stringify-word-seq '("this" "is" "a" "string")) "this is a string"))))
 
 (deftest wordify-single-digits
   (testing "should return zero when 0 provided"
