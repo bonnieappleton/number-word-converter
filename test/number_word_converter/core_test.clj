@@ -2,6 +2,6 @@
   (:require [clojure.test :refer :all]
             [number-word-converter.core :refer :all]))
 
-(deftest a-test
-  (testing "FIXME, I fail."
-    (is (= 0 1))))
+(deftest number-word-conversion
+  (testing "should return zero when 0 provided"
+    (is (=  (word-from-number 0) "zero"))))
