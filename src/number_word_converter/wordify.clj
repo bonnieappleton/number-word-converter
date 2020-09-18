@@ -22,6 +22,7 @@
 
 (defn decorate-word-seqs [[hundred-seq thousand-seq million-seq]]
   [million-seq
+   (if (seq million-seq) "million")
    thousand-seq
    (if (seq thousand-seq) "thousand")
    hundred-seq])

@@ -13,10 +13,10 @@
     (is (= (three-digit-word-seq '(0 0 1)) '("one" "hundred")))))
 
 (deftest decorate-word-seqs-test
-  (testing "should add thousand decoration if there are numbers in the thousand seq"
-    (is (= (decorate-word-seqs '(() ("not empty") ("another seq"))) '(["another seq"] ["not empty"] "thousand" []))))
+  (testing "should add thousand and million decoration if there are numbers in those seqs"
+    (is (= (decorate-word-seqs '(() ("not empty") ("another seq"))) '(["another seq"] "million" ["not empty"] "thousand" []))))
   (testing "should not add thousand decoration if thousand seq is empty"
-    (is (= (decorate-word-seqs '(() () ())) '([] [] nil [])))))
+    (is (= (decorate-word-seqs '(() () ())) '([] nil [] nil [])))))
 
 (deftest word-seq-test
   (testing "should turn a sequence of numbers into a word sequence"
