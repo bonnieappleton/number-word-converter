@@ -10,10 +10,10 @@
        (map (comp read-string str))))
 
 (defn three-digit-word-seq [[int-value ten-value hundred-value]]
-  (let [hundreds-words (if (pos-int? hundred-value) [((keywordise hundred-value) words/integers) "hundred"])
+  (let [hundreds-words (if (pos-int? hundred-value) [((keywordise hundred-value) words/integers) words/hundred])
         and (if (and (pos-int? hundred-value)
                      (or (pos-int? ten-value) (pos-int? int-value)))
-              ["and"])
+              [words/and])
         tens-words (if (= ten-value 1)
                      [((keywordise int-value) words/teens)]
                      [((keywordise ten-value) words/tens)

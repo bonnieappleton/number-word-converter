@@ -34,3 +34,11 @@
    :9 "ninety"})
 
 (def zero "zero")
+
+(def hundred "hundred")
+
+(def thousand "thousand")
+
+(def million "million")
+
+(def and "and")
