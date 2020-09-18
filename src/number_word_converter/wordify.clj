@@ -3,18 +3,21 @@
 
 (def keywordise (comp keyword str))
 
-(defn- teen? [num]
-  (and (> num 10) (< num 20)))
+(defn reverse-seq-from-number [num]
+  (->> num
+       str
+       seq
+       reverse
+       (map (comp read-string str))))
 
-(defn word-seq [num]
-  (let [hundred-value (int (/ num 100))
-        rest (mod num 100)]
-    (concat (if (pos-int? hundred-value) [((keywordise hundred-value) words/integers) "hundred"])
-            (if (and (pos-int? hundred-value) (pos-int? rest)) ["and"])
-            (if (teen? rest)
-              [((keywordise (mod rest 10)) words/teens)]
-              [((keywordise (int (/ rest 10))) words/tens)
-               ((keywordise (mod rest 10)) words/integers)]))))
+(defn word-seq [[int-value ten-value hundred-value]]
+  (let [hundreds-words (if (pos-int? hundred-value) [((keywordise hundred-value) words/integers) "hundred"])
+        and (if (and (pos-int? hundred-value) (or (pos-int? ten-value) (pos-int? int-value))) ["and"])
+        tens-words (if (= ten-value 1)
+                     [((keywordise int-value) words/teens)]
+                     [((keywordise ten-value) words/tens)
+                      ((keywordise int-value) words/integers)])]
+    (concat hundreds-words and tens-words)))
 
 (defn stringify-word-seq [word-seq]
   (->> word-seq
@@ -26,5 +29,6 @@
   (if (zero? num)
     words/zero
     (-> num
+        reverse-seq-from-number
         word-seq
         stringify-word-seq)))

@@ -2,9 +2,13 @@
   (:require [clojure.test :refer :all]
             [number-word-converter.wordify :refer :all]))
 
+(deftest number-to-seq-test
+  (testing "should turn number into a seq of the digits in reverse"
+    (is (= (reverse-seq-from-number 1234) '(4 3 2 1)))))
+
 (deftest word-seq-test
   (testing "should produce sequence of words for number"
-    (is (= (word-seq 521) '("five" "hundred" "and" "twenty" "one")))))
+    (is (= (word-seq '(1 2 5)) '("five" "hundred" "and" "twenty" "one")))))
 
 (deftest stringify-word-seq-test
   (testing "should turn a word seq into a string without nils"
