@@ -12,4 +12,8 @@
 
 (deftest wordify-double-digits
   (testing "should return ten when 10 provided"
-    (is (= (wordify 10) "ten"))))
+    (is (= (wordify 10) "ten")))
+  (testing "should return twenty one when 21 provided"
+    (is (= (wordify 21) "twenty one")))
+  (testing "should return seventeen when 17 provided"
+    (is (= (wordify 17) "seventeen"))))

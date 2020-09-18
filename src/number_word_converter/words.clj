@@ -11,6 +11,17 @@
    :8 "eight"
    :9 "nine"})
 
+(def teens
+  {:1 "eleven"
+   :2 "twelve"
+   :3 "thirteen"
+   :4 "fourteen"
+   :5 "fifteen"
+   :6 "sixteen"
+   :7 "seventeen"
+   :8 "eighteen"
+   :9 "nineteen"})
+
 (def tens
   {:1 "ten"
    :2 "twenty"
