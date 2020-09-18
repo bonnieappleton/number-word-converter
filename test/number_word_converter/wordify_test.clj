@@ -4,7 +4,7 @@
 
 (deftest word-seq-test
   (testing "should produce sequence of words for number"
-    (is (= (word-seq 21) '("twenty" "one")))))
+    (is (= (word-seq 521) '("five" "hundred" "and" "twenty" "one")))))
 
 (deftest stringify-word-seq-test
   (testing "should turn a word seq into a string without nils"
@@ -28,4 +28,8 @@
 
 (deftest wordify-triple-digits
   (testing "should return one hundred when 100 provided"
-    (is (= (wordify 100) "one hundred"))))
+    (is (= (wordify 100) "one hundred")))
+  (testing "should return one hundred and twenty one when 101 provided"
+    (is (= (wordify 101) "one hundred and one")))
+  (testing "should return nine hundred and nineteen when 919 provided"
+    (is (= (wordify 919) "nine hundred and nineteen"))))

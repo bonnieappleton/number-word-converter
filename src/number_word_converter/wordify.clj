@@ -7,12 +7,14 @@
   (and (> num 10) (< num 20)))
 
 (defn word-seq [num]
-  (let [hundred-value (int (/ num 100))]
+  (let [hundred-value (int (/ num 100))
+        rest (mod num 100)]
     (concat (if (pos-int? hundred-value) [((keywordise hundred-value) words/integers) "hundred"])
-            (if (teen? num)
-              [((keywordise (mod num 10)) words/teens)]
-              [((keywordise (int (/ num 10))) words/tens)
-               ((keywordise (mod num 10)) words/integers)]))))
+            (if (and (pos-int? hundred-value) (pos-int? rest)) ["and"])
+            (if (teen? rest)
+              [((keywordise (mod rest 10)) words/teens)]
+              [((keywordise (int (/ rest 10))) words/tens)
+               ((keywordise (mod rest 10)) words/integers)]))))
 
 (defn stringify-word-seq [word-seq]
   (->> word-seq
