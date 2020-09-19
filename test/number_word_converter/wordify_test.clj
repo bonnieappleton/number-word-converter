@@ -16,7 +16,7 @@
   (testing "should add thousand and million decoration if there are numbers in those seqs"
     (is (= (decorate-word-seqs '(() ("not empty") ("another seq"))) '(["another seq"] "million" ["not empty"] "thousand" []))))
   (testing "should not add thousand decoration if thousand seq is empty"
-    (is (= (decorate-word-seqs '(() () ())) '([] nil [] nil [])))))
+    (is (= (decorate-word-seqs '(() () ())) '([] [] [])))))
 
 (deftest word-seq-test
   (testing "should turn a sequence of numbers into a word sequence"
@@ -53,9 +53,13 @@
 (deftest wordify-thousands
   (testing "should return one thousand when 1000 provided"
     (is (= (wordify 1000) "one thousand")))
-  (testing "should return nine thousand nine hundred and ninety nine when 1000 provided"
-    (is (= (wordify 9999) "nine thousand nine hundred and ninety nine"))))
+  (testing "should return nine thousand nine hundred and ninety nine when 9999 provided"
+    (is (= (wordify 9999) "nine thousand nine hundred and ninety nine")))
+  (testing "should return one thousand and one when 1001 provided"
+    (is (= (wordify 1001) "one thousand and one"))))
 
 (deftest wordify-millions
   (testing "should return fifty six million nine hundred and forty five thousand seven hundred and eighty one"
-    (is (= (wordify 56945781) "fifty six million nine hundred and forty five thousand seven hundred and eighty one"))))
+    (is (= (wordify 56945781) "fifty six million nine hundred and forty five thousand seven hundred and eighty one")))
+  (testing "should return one million and one when 1000001 provided"
+    (is (= (wordify 1000001) "one million and one"))))
